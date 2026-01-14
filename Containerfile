@@ -1,9 +1,10 @@
 FROM python:slim
 
 RUN set -x \
-  && apt-get update \
-  && apt-get upgrade -y \
-  && rm -rf /var/lib/apt/lists/* \
+  && apt update \
+  && apt upgrade -y \
+  && apt install -y \
+    tini \
   \
   && pip install --no-cache-dir \
     scrapegraphai \
@@ -13,7 +14,7 @@ RUN set -x \
     mcp \
   \
   && playwright install-deps \
-  && playwright install
+  && playwright install \
+  && rm -rf /var/lib/apt/lists/* \
 
-COPY server.py /
-ENTRYPOINT ["python", "/server.py"]
+ENTRYPOINT ["tini", "--"]
