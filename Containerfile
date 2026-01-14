@@ -15,6 +15,6 @@ RUN set -x \
   \
   && playwright install-deps \
   && playwright install \
-  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["tini", "--"]
